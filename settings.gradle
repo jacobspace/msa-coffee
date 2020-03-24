@@ -1,0 +1,6 @@
+rootProject.name = 'msa-coffee'
+
+include 'eureka'
+include 'member'
+include 'order'
+include 'status'
