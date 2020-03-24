@@ -1,0 +1,28 @@
+server:
+  port: 8101
+
+logging:
+  level:
+    com.example.msa: debug
+    org.springframework.jdbc: debug
+
+spring:
+  application:
+    name: msa-coffee-member
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    sql-script-encoding: UTF-8
+
+  h2:
+    console:
+      enabled: true
+
+mybatis:
+  type-aliases-package: com.example.msa.repository
+  mapper-locations: classpath:sql/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

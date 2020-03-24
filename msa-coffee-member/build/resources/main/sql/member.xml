@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.msa.repository.MemberRepository">
+    <insert id="save" parameterType="com.example.msa.repository.Member">
+        insert into member (name, phone_number)
+        values (#{name}, #{phoneNumber})
+    </insert>
+    <select id="findAll" resultType="com.example.msa.repository.Member">
+        select * from member;
+    </select>
+    <select id="findById" resultType="com.example.msa.repository.Member">
+        select * from member
+        where id = #{id};
+    </select>
+</mapper>
