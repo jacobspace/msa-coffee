@@ -28,4 +28,8 @@ public class MemberService {
     public MemberResponseDto findById(Long id) {
         return new MemberResponseDto(memberRepository.findById(id));
     }
+
+    public MemberResponseDto findByName(String name) {
+        return new MemberResponseDto(memberRepository.findByName(name));
+    }
 }
