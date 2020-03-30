@@ -1,6 +1,7 @@
 package com.example.msa.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface MemberRepository {
     Long save(Member member);
     List<Member> findAll();
     Member findById(Long id);
-    Member findByName(String name);
+    Member findByNameAndPhoneNumber(@Param("name") String name, @Param("phoneNumber") String PhoneNumber);
 }

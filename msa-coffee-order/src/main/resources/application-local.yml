@@ -8,7 +8,7 @@ logging:
 
 spring:
   application:
-    name: msa-coffee-member
+    name: msa-coffee-order
 
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=1
@@ -26,3 +26,9 @@ mybatis:
   mapper-locations: classpath:sql/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+msa:
+  coffee:
+    member:
+      url: "http://localhost:8175"
+

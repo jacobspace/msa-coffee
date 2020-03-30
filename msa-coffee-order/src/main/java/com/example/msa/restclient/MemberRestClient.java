@@ -14,7 +14,7 @@ public class MemberRestClient {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public MemberVo findMemberByName(String name) {
-        return restTemplate.getForObject("http://localhost:8075/api/v1.0/members/" + name, MemberVo.class);
+    public MemberVo findMemberByNameAndPhoneNumber() {
+        return restTemplate.getForObject("http://localhost:8075/api/v1.0/members", MemberVo.class);
     }
 }
