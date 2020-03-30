@@ -15,8 +15,7 @@ public class Order {
     private String memberName;
 
     @Builder
-    public Order(Long id, Integer orderNo, String coffeeName, Integer coffeeCount, String memberName) {
-        this.id = id;
+    public Order(Integer orderNo, String coffeeName, Integer coffeeCount, String memberName) {
         this.orderNo = orderNo;
         this.coffeeName = coffeeName;
         this.coffeeCount = coffeeCount;

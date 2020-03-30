@@ -3,8 +3,10 @@ package com.example.msa.rest.dto;
 import com.example.msa.repository.Order;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class OrderSaveRequestDto {
 
     private Integer orderNo;

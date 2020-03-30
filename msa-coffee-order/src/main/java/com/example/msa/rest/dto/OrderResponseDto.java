@@ -2,7 +2,9 @@ package com.example.msa.rest.dto;
 
 import com.example.msa.repository.Order;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class OrderResponseDto {
 
     private Long id;

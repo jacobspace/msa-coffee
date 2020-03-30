@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.msa.repository.OrderRepository">
+    <insert id="save" parameterType="com.example.msa.repository.Order">
+        insert into tb_order (order_no, coffee_name, coffee_count, member_name)
+        values (#{orderNo}, #{coffeeName}, #{coffeeCount}, #{memberName})
+    </insert>
+    <select id="findAll" resultType="com.example.msa.repository.Order">
+        select * from tb_order;
+    </select>
+    <select id="findById" resultType="com.example.msa.repository.Order">
+        select * from tb_order
+        where id = #{id};
+    </select>
+</mapper>
