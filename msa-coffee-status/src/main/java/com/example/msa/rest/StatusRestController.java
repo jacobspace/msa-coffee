@@ -17,13 +17,13 @@ public class StatusRestController {
     private final StatusService statusService;
 
     @ApiOperation(value = "find all status")
-    @GetMapping("/api/v1.0/status")
+    @GetMapping("/api/v1/status")
     public List<StatusResponseDto> findAll() {
         return statusService.findAll();
     }
 
     @ApiOperation(value = "find status by id")
-    @GetMapping("/api/v1.0/status/{id}")
+    @GetMapping("/api/v1/status/{id}")
     public StatusResponseDto findById(@PathVariable("id") Long id) {
         return statusService.findById(id);
     }

@@ -9,14 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderSaveRequestDto {
 
-    private Integer orderNo;
     private String coffeeName;
     private Integer coffeeCount;
     private String memberName;
 
     @Builder
-    public OrderSaveRequestDto(Integer orderNo, String coffeeName, Integer coffeeCount, String memberName) {
-        this.orderNo = orderNo;
+    public OrderSaveRequestDto(String coffeeName, Integer coffeeCount, String memberName) {
         this.coffeeName = coffeeName;
         this.coffeeCount = coffeeCount;
         this.memberName = memberName;
@@ -24,7 +22,6 @@ public class OrderSaveRequestDto {
 
     public Order toEntity() {
         return Order.builder()
-                .orderNo(orderNo)
                 .coffeeName(coffeeName)
                 .coffeeCount(coffeeCount)
                 .memberName(memberName)

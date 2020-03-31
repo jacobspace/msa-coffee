@@ -17,7 +17,7 @@ public class OrderRestController {
 
     @ApiOperation(value = "save order")
     @PostMapping("/api/v1/orders")
-    public Long save(@RequestBody OrderSaveRequestDto requestDto) {
+    public Integer save(@RequestBody OrderSaveRequestDto requestDto) {
         return orderService.save(requestDto);
     }
 

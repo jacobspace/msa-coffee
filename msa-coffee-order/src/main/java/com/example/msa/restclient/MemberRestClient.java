@@ -4,6 +4,7 @@ import com.example.msa.restclient.vo.MemberVo;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class MemberRestClient {
@@ -14,7 +15,10 @@ public class MemberRestClient {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public MemberVo findMemberByNameAndPhoneNumber() {
-        return restTemplate.getForObject("http://localhost:8075/api/v1.0/members", MemberVo.class);
+    public MemberVo findByParam(String name) {
+        String url = "http://localhost:8075/api/v1/members/find";
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        builder.queryParam("name", name);
+        return restTemplate.getForObject(builder.toUriString(), MemberVo.class);
     }
 }

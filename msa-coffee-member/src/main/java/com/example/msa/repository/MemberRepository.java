@@ -10,5 +10,5 @@ public interface MemberRepository {
     Long save(Member member);
     List<Member> findAll();
     Member findById(Long id);
-    Member findByNameAndPhoneNumber(@Param("name") String name, @Param("phoneNumber") String PhoneNumber);
+    Member findByParam(String name);
 }

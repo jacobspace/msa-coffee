@@ -1,5 +1,6 @@
 package com.example.msa.service;
 
+import com.example.msa.repository.Order;
 import com.example.msa.repository.OrderRepository;
 import com.example.msa.rest.dto.OrderResponseDto;
 import com.example.msa.rest.dto.OrderSaveRequestDto;
@@ -17,8 +18,13 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberFeignClient memberFeignClient;
 
-    public Long save(OrderSaveRequestDto requestDto) {
-        return orderRepository.save(requestDto.toEntity());
+    public Integer save(OrderSaveRequestDto requestDto) {
+        if (memberFeignClient.findByParam(requestDto.getMemberName()) == null) {
+            return 0;
+        }
+        Order order = requestDto.toEntity();
+        orderRepository.save(order);
+        return order.getOrderNo();
     }
 
     public List<OrderResponseDto> findAll() {
@@ -28,11 +34,5 @@ public class OrderService {
     public OrderResponseDto findById(Long id) {
         return new OrderResponseDto(orderRepository.findById(id));
     }
-
-//    private boolean isExistMember(String name) {
-//        if (memberFeignClient.findMemberBydNameAndPhoneNumber(name) != null) {
-//
-//        }
-//    }
 
 }

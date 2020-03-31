@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,13 +33,13 @@ class MemberRestControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void 신규_회원_등록() throws Exception {
+    void 신규회원등록() throws Exception {
         //given
-        MemberSaveRequestDto requestDto = MemberSaveRequestDto.builder()
+        MemberSaveRequestDto memberSaveRequestDto = MemberSaveRequestDto.builder()
                 .name("손흥민")
                 .phoneNumber("01012341234").build();
 
-        String requestBody = new ObjectMapper().writeValueAsString(requestDto);
+        String requestBody = new ObjectMapper().writeValueAsString(memberSaveRequestDto);
 
         given(memberService.save(any(MemberSaveRequestDto.class))).willReturn(1L);
 
@@ -55,14 +56,14 @@ class MemberRestControllerTest {
     }
 
     @Test
-    void 회원_목록_조회() throws Exception {
+    void 회원목록조회() throws Exception {
         //given
-        MemberResponseDto requestDto = MemberResponseDto.builder()
+        MemberResponseDto memberResponseDto = MemberResponseDto.builder()
                 .id(1L)
                 .name("손흥민")
                 .phoneNumber("01012341234").build();
 
-        List<MemberResponseDto> memberResponseDtoList = Collections.singletonList(requestDto);
+        List<MemberResponseDto> memberResponseDtoList = Collections.singletonList(memberResponseDto);
 
         given(memberService.findAll()).willReturn(memberResponseDtoList);
 
@@ -73,5 +74,24 @@ class MemberRestControllerTest {
                 .andExpect(jsonPath("$[0].id", equalTo("1")))
                 .andExpect(jsonPath("$[0].name", equalTo("손흥민")))
                 .andExpect(jsonPath("$[0].phoneNumber", equalTo("01012341234")));
+    }
+
+    @Test
+    void 회원명으로_회원조회() throws Exception {
+        //given
+        MemberResponseDto expectedResponse = MemberResponseDto.builder()
+                .id(1L)
+                .name("손흥민")
+                .phoneNumber("01012341234").build();
+
+        given(memberService.findByParam(expectedResponse.getName())).willReturn(expectedResponse);
+
+        //when
+        mockMvc.perform(get("/api/v1/members/find")
+                .queryParam("name", expectedResponse.getName())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", equalTo(expectedResponse.getName())));
+
     }
 }

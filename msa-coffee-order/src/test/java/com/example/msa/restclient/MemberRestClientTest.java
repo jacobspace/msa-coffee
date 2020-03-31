@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -22,7 +23,7 @@ class MemberRestClientTest {
     private MockRestServiceServer mockRestServiceServer;
 
     @Test
-    void findMemberByName() throws Exception {
+    void findByParam() throws Exception {
         //given
         String name = "test";
 
@@ -31,11 +32,14 @@ class MemberRestClientTest {
 
         String responseMember = new ObjectMapper().writeValueAsString(expectedMemberVo);
 
-        this.mockRestServiceServer.expect(requestTo("http://localhost:8075/api/v1.0/members/" + name))
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8075/api/v1/members/find");
+        builder.queryParam("name", name);
+
+        this.mockRestServiceServer.expect(requestTo(builder.toUriString()))
                 .andRespond(withSuccess(responseMember, MediaType.APPLICATION_JSON));
 
         //when
-        MemberVo actualMemberVo = memberRestClient.findMemberByName(name);
+        MemberVo actualMemberVo = memberRestClient.findByParam(name);
 
         //then
         Assertions.assertThat(actualMemberVo.getName()).isEqualTo(expectedMemberVo.getName());

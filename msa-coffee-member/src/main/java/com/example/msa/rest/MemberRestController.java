@@ -33,11 +33,9 @@ public class MemberRestController {
         return memberService.findById(id);
     }
 
-    @ApiOperation(value = "find member by name and phoneNumber")
-    @GetMapping("/api/v1/members")
-    public MemberResponseDto findByNameAndPhoneNumber(@RequestParam("name") String name,
-                                        @RequestParam("phoneNumber") String phoneNumber) {
-
-        return memberService.findByNameAndPhoneNumber(name, phoneNumber);
+    @ApiOperation(value = "find member by name")
+    @GetMapping("/api/v1/members/find")
+    public MemberResponseDto findByParam(@RequestParam String name) {
+        return memberService.findByParam(name);
     }
 }

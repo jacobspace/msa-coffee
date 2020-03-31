@@ -21,6 +21,12 @@ spring:
     console:
       enabled: true
 
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
 mybatis:
   type-aliases-package: com.example.msa.repository
   mapper-locations: classpath:sql/*.xml

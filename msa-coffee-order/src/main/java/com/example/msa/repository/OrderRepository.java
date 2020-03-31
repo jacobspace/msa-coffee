@@ -6,7 +6,7 @@ import java.util.List;
 
 @Mapper
 public interface OrderRepository {
-    Long save(Order order);
+    void save(Order order);
     List<Order> findAll();
     Order findById(Long id);
 }

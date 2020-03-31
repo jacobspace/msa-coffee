@@ -29,7 +29,7 @@ public class MemberService {
         return new MemberResponseDto(memberRepository.findById(id));
     }
 
-    public MemberResponseDto findByNameAndPhoneNumber(String name, String phoneNumber) {
-        return new MemberResponseDto(memberRepository.findByNameAndPhoneNumber(name, phoneNumber));
+    public MemberResponseDto findByParam(String name) {
+        return new MemberResponseDto(memberRepository.findByParam(name));
     }
 }

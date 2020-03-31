@@ -12,9 +12,8 @@
         select * from tb_member
         where id = #{id};
     </select>
-    <select id="findByNameAndPhoneNumber" resultType="com.example.msa.repository.Member">
+    <select id="findByParam" resultType="com.example.msa.repository.Member">
         select * from tb_member
-        where name = #{name}
-        and phone_number = #{phoneNumber};
+        where name = #{name};
     </select>
 </mapper>
