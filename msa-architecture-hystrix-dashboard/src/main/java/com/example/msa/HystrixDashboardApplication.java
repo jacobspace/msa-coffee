@@ -3,13 +3,13 @@ package com.example.msa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 
-@EnableSwagger2
 @EnableEurekaClient
+@EnableHystrixDashboard
 @SpringBootApplication
-public class StatusApplication {
+public class HystrixDashboardApplication {
     public static void main(String[] args) {
-        SpringApplication.run(StatusApplication.class, args);
+        SpringApplication.run(HystrixDashboardApplication.class, args);
     }
 }

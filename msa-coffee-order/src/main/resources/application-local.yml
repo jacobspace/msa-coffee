@@ -3,8 +3,9 @@ server:
 
 logging:
   level:
-    com.example.msa: debug
     org.springframework.jdbc: debug
+    com.example.msa: debug
+    com.example.msa.restclient: debug
 
 spring:
   application:
@@ -27,7 +28,13 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8170/eureka/
+  instance:
+    prefer-ip-address: true
+
 msa:
   coffee:
-    member:
-      url: "http://localhost:8175"
+    member: msa-coffee-member

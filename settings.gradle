@@ -1,7 +1,9 @@
 rootProject.name = 'msa-coffee'
 
-include 'msa-coffee-eureka'
+include 'msa-architecture-eureka'
+include 'msa-architecture-hystrix-dashboard'
 include 'msa-coffee-member'
 include 'msa-coffee-order'
 include 'msa-coffee-status'
+include 'msa-architecture-turbine'
 
