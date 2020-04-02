@@ -5,7 +5,10 @@ logging:
   level:
     org.springframework.jdbc: debug
     com.example.msa: debug
-    com.example.msa.restclient: debug
+
+msa:
+  coffee:
+    member: msa-coffee-member
 
 spring:
   application:
@@ -35,6 +38,18 @@ eureka:
   instance:
     prefer-ip-address: true
 
-msa:
-  coffee:
-    member: msa-coffee-member
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

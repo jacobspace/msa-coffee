@@ -22,7 +22,7 @@ public class OrderRestController {
     }
 
     @ApiOperation(value = "find all order")
-    @GetMapping("/api/v1/orders/")
+    @GetMapping("/api/v1/orders")
     public List<OrderResponseDto> findAll() {
         return orderService.findAll();
     }

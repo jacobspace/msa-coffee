@@ -3,6 +3,7 @@ package com.example.msa.rest;
 import com.example.msa.rest.dto.MemberResponseDto;
 import com.example.msa.rest.dto.MemberSaveRequestDto;
 import com.example.msa.service.MemberService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ public class MemberRestController {
     }
 
     @ApiOperation(value = "find all member")
+    @HystrixCommand
     @GetMapping("/api/v1/members")
     public List<MemberResponseDto> findAll() {
         return memberService.findAll();
