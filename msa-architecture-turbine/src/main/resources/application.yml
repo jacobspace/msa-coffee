@@ -8,7 +8,18 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:/8170/eureka/
+      defaultZone: http://localhost:8170/eureka/
   instance:
     prefer-ip-address: true
 
+turbine:
+  aggregator:
+    cluster-config: ${msa.coffee.application}
+  app-config: ${msa.coffee.application}
+
+#  app-config: MSA-COFFEE-MEMBER
+#  cluster-name-expression: new String("default")
+
+msa:
+  coffee:
+    application: MSA-COFFEE-MEMBER, MSA-COFFEE-ORDER, MSA-COFFEE-STATUS

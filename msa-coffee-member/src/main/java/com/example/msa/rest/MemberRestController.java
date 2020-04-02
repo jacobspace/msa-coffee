@@ -17,6 +17,7 @@ public class MemberRestController {
     private final MemberService memberService;
 
     @ApiOperation(value = "save member")
+    @HystrixCommand
     @PostMapping("/api/v1/members")
     public Long save(@RequestBody MemberSaveRequestDto requestDto) {
         return memberService.save(requestDto);
@@ -30,12 +31,14 @@ public class MemberRestController {
     }
 
     @ApiOperation(value = "find member by id")
+    @HystrixCommand
     @GetMapping("/api/v1/members/{id}")
     public MemberResponseDto findById(@PathVariable Long id) {
         return memberService.findById(id);
     }
 
     @ApiOperation(value = "find member by param")
+    @HystrixCommand
     @GetMapping("/api/v1/members/find")
     public MemberResponseDto findByParam(@RequestParam String name) {
         return memberService.findByParam(name);
