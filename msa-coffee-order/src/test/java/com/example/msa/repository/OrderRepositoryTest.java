@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @MybatisTest(properties = {"spring.datasource.data="})
 class OrderRepositoryTest {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private OrderRepository orderRepository;
 

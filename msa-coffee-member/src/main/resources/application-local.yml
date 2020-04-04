@@ -10,6 +10,9 @@ spring:
   application:
     name: msa-coffee-member
 
+  profiles:
+    include: chaos-monkey
+
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=1
     driver-class-name: org.h2.Driver
@@ -43,7 +46,24 @@ eureka:
       cluster: USER
 
 management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: health, info, hystrix.stream
+        include: health, info, chaosmonkey, hystrix.stream
+
+chaos:
+  monkey:
+    enabled: true
+    watcher:
+      repository: true
+    #      rest-controller: true
+    assaults:
+      level: 3
+      latency-active: true
+      latency-range-start: 3000
+      latency-range-end: 7000
+#    assaults:
+#      watched-custom-services: com.example.msa.repository.OrderRepository, com.example.msa.rest.OrderRestController
