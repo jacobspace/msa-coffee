@@ -14,11 +14,16 @@ eureka:
 
 turbine:
   aggregator:
-    cluster-config: ${msa.coffee.application}
+    cluster-config: SYSTEM, USER
   app-config: ${msa.coffee.application}
+  cluster-name-expression: metadata['cluster']
 
 #  app-config: MSA-COFFEE-MEMBER
 #  cluster-name-expression: new String("default")
+
+#  aggregator:
+#    cluster-config: ${msa.coffee.application}
+#  app-config: ${msa.coffee.application}
 
 msa:
   coffee:

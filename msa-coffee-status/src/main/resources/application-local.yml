@@ -33,9 +33,11 @@ eureka:
       defaultZone: http://localhost:8170/eureka/
   instance:
     prefer-ip-address: true
+    metadata-map:
+      cluster: SYSTEM
 
 management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: health, info, hystrix.stream
