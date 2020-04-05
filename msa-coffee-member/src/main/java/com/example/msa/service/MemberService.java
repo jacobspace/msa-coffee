@@ -1,5 +1,6 @@
 package com.example.msa.service;
 
+import com.example.msa.repository.Member;
 import com.example.msa.repository.MemberRepository;
 import com.example.msa.rest.dto.MemberResponseDto;
 import com.example.msa.rest.dto.MemberSaveRequestDto;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -26,7 +28,9 @@ public class MemberService {
     }
 
     public MemberResponseDto findById(Long id) {
-        return new MemberResponseDto(memberRepository.findById(id));
+        Optional<Member> member = memberRepository.findById(id);
+        member.orElseThrow(() -> new IllegalArgumentException("존재하지않는 회원번호 : " + id));
+        return new MemberResponseDto(member.get());
     }
 
     public MemberResponseDto findByParam(String name) {

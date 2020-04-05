@@ -13,7 +13,8 @@ public class Member {
     private String phoneNumber;
 
     @Builder
-    public Member(String name, String phoneNumber) {
+    public Member(Long id, String name, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
