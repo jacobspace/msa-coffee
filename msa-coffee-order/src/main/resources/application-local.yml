@@ -72,6 +72,6 @@ chaos:
       level: 3
       latency-active: true
       latency-range-start: 3000
-      latency-range-end: 7000
+      latency-range-end: 6000
 #    assaults:
 #      watched-custom-services: com.example.msa.repository.OrderRepository, com.example.msa.rest.OrderRestController
