@@ -56,16 +56,16 @@ management:
 
 chaos:
   monkey:
-    enabled: true
+    enabled: false
     watcher:
       repository: true
     #      rest-controller: true
     assaults:
       level: 3
-      latency-active: false
+      latency-active: true
       latency-range-start: 3000
       latency-range-end: 6000
-      exceptions-active: true
+      exceptions-active: false
       exception:
         type: java.lang.IllegalArgumentException
 #    assaults:
