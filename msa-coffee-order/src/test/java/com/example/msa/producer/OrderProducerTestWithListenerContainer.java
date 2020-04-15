@@ -20,6 +20,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.hamcrest.KafkaMatchers;
+import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -54,6 +55,8 @@ class OrderProducerTestWithListenerContainer {
 
         container.setBeanName("orderProducerTests");
         container.start();
+        ContainerTestUtils.waitForAssignment(container,
+                embeddedKafkaBroker.getPartitionsPerTopic());
 
         Order order = Order.builder()
                 .orderNo(1)

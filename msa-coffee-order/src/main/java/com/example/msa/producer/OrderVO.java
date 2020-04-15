@@ -1,8 +1,10 @@
 package com.example.msa.producer;
 
 import com.example.msa.repository.Order;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter @EqualsAndHashCode @ToString
 @NoArgsConstructor
