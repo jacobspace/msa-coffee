@@ -1,11 +1,10 @@
 package com.example.msa.producer;
 
 import com.example.msa.repository.Order;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
 
-@Getter @EqualsAndHashCode
+@Getter @EqualsAndHashCode @ToString
 @NoArgsConstructor
 public class OrderVO {
 
