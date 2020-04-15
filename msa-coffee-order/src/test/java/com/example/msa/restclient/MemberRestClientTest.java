@@ -1,6 +1,5 @@
 package com.example.msa.restclient;
 
-import com.example.msa.restclient.vo.MemberVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,11 +15,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @RestClientTest(MemberRestClient.class)
 class MemberRestClientTest {
 
-    @Autowired
-    private MemberRestClient memberRestClient;
-
-    @Autowired
-    private MockRestServiceServer mockRestServiceServer;
+    @Autowired private MemberRestClient memberRestClient;
+    @Autowired private MockRestServiceServer mockRestServiceServer;
 
     @Test
     void findByParam() throws Exception {

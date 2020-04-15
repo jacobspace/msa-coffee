@@ -1,4 +1,4 @@
-package com.example.msa.restclient.vo;
+package com.example.msa.restclient;
 
 import lombok.Builder;
 import lombok.Getter;
