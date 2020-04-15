@@ -1,10 +1,11 @@
 package com.example.msa.producer;
 
 import com.example.msa.repository.Order;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Getter @EqualsAndHashCode
 @NoArgsConstructor
 public class OrderVO {
 
