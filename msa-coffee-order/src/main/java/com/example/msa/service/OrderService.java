@@ -1,5 +1,7 @@
 package com.example.msa.service;
 
+import com.example.msa.producer.OrderProducer;
+import com.example.msa.producer.OrderVO;
 import com.example.msa.repository.Order;
 import com.example.msa.repository.OrderRepository;
 import com.example.msa.rest.dto.OrderResponseDto;
@@ -17,13 +19,18 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final MemberFeignClient memberFeignClient;
+    private final OrderProducer orderProducer;
 
     public Integer save(OrderSaveRequestDto requestDto) {
         if (memberFeignClient.findByParam(requestDto.getMemberName()) == null) {
             return 0;
         }
+
         Order order = requestDto.toEntity();
         orderRepository.save(order);
+
+        orderProducer.send(new OrderVO(order));
+
         return order.getOrderNo();
     }
 
