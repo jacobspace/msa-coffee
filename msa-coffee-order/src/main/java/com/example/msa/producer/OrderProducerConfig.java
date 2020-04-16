@@ -19,7 +19,7 @@ public class OrderProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    public Map<String, Object> producerConfig() {
+    public Map<String, Object> producerConfigs() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -27,13 +27,12 @@ public class OrderProducerConfig {
         return configs;
     }
 
-    @Bean
     public ProducerFactory<String, OrderVO> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfig());
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, OrderVO> producerTemplate() {
+    public KafkaTemplate<String, OrderVO> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

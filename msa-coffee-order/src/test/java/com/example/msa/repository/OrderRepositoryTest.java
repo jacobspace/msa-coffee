@@ -9,8 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @MybatisTest(properties = {"spring.datasource.data="})
 class OrderRepositoryTest {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    @Autowired private OrderRepository orderRepository;
 
     @Test
     void save() {
