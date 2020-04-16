@@ -27,9 +27,8 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-
 	testImplementation {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude module: 'junit-vintage-engine'
 	}
 }
 
@@ -46,6 +45,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

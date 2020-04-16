@@ -14,9 +14,6 @@ spring:
   application:
     name: msa-coffee-order
 
-  profiles:
-    include: chaos-monkey
-
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=1
     driver-class-name: org.h2.Driver
@@ -59,24 +56,7 @@ feign:
         loggerLevel: FULL
 
 management:
-  endpoint:
-    chaosmonkey:
-      enabled: true
   endpoints:
     web:
       exposure:
-        include: health, info, chaosmonkey, hystrix.stream
-
-chaos:
-  monkey:
-    enabled: false
-    watcher:
-      repository: true
-#      rest-controller: true
-    assaults:
-      level: 3
-      latency-active: true
-      latency-range-start: 3000
-      latency-range-end: 6000
-#    assaults:
-#      watched-custom-services: com.example.msa.repository.OrderRepository, com.example.msa.rest.OrderRestController
+        include: health, info, hystrix.stream

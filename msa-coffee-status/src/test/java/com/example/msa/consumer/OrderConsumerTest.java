@@ -1,6 +1,7 @@
 package com.example.msa.consumer;
 
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @DirtiesContext
 @EmbeddedKafka(partitions = 1, topics = {"${spring.kafka.order.topic}"})
-@SpringBootTest(properties = {"spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}"},
+@SpringBootTest(properties = {"spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}", "spring.kafka.consumer.auto-offset-reset=earliest"},
         classes = {OrderConsumerConfig.class, OrderConsumer.class})
 class OrderConsumerTest {
 
@@ -42,7 +43,7 @@ class OrderConsumerTest {
         }
 
         Map<String, Object> producerProps = KafkaTestUtils.producerProps(embeddedKafkaBroker);
-        ProducerFactory<String, OrderVO> producerFactory = new DefaultKafkaProducerFactory<String, OrderVO>(producerProps, StringSerializer::new, JsonSerializer::new);
+        ProducerFactory<String, OrderVO> producerFactory = new DefaultKafkaProducerFactory<String, OrderVO>(producerProps, new StringSerializer(), new JsonSerializer<>());
         KafkaTemplate<String, OrderVO> kafkaTemplate = new KafkaTemplate<>(producerFactory);
         kafkaTemplate.setDefaultTopic("orderTopic");
 
@@ -53,6 +54,5 @@ class OrderConsumerTest {
                 .memberName("김석환").build();
 
         kafkaTemplate.sendDefault(orderVO);
-
     }
 }
