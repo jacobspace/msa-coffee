@@ -27,6 +27,9 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    testImplementation {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 dependencies {
@@ -45,11 +48,10 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.2'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+
 }
 
 test {
