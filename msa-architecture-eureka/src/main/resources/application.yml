@@ -1,6 +1,10 @@
 server:
   port: 8170
 
+logging:
+  file: /tmp/logs/${spring.application.name}.log
+  path: /tmp/logspath/
+
 spring:
   application:
     name: msa-architecture-eureka

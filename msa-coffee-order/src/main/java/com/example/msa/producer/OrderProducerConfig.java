@@ -28,7 +28,7 @@ public class OrderProducerConfig {
     }
 
     public ProducerFactory<String, OrderVO> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
+        return new DefaultKafkaProducerFactory<String, OrderVO>(producerConfigs());
     }
 
     @Bean

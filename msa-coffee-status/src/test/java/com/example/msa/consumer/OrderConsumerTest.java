@@ -1,10 +1,16 @@
 package com.example.msa.consumer;
 
+import com.example.msa.repository.Status;
+import com.example.msa.repository.StatusRepository;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,9 +26,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.Map;
 
 @DirtiesContext
+@ExtendWith(MockitoExtension.class)
 @EmbeddedKafka(partitions = 1, topics = {"${spring.kafka.order.topic}"})
-@SpringBootTest(properties = {"spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}", "spring.kafka.consumer.auto-offset-reset=earliest"},
-        classes = {OrderConsumerConfig.class, OrderConsumer.class})
+@SpringBootTest(
+        classes = {OrderConsumerConfig.class, OrderConsumer.class},
+        properties = {
+                "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}",
+                "spring.kafka.consumer.auto-offset-reset=earliest"})
 class OrderConsumerTest {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -32,6 +42,7 @@ class OrderConsumerTest {
     @Autowired private KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
 
     @Autowired private OrderConsumer orderConsumer;
+    @MockBean private StatusRepository statusRepository;
 
     @Test
     void listen() throws InterruptedException {
@@ -54,5 +65,9 @@ class OrderConsumerTest {
                 .memberName("김석환").build();
 
         kafkaTemplate.sendDefault(orderVO);
+
+        Thread.sleep(500);
+
+        Mockito.verify(statusRepository).save(ArgumentMatchers.any(Status.class));
     }
 }

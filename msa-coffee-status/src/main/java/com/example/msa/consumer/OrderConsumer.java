@@ -22,6 +22,6 @@ public class OrderConsumer {
     public void listen(ConsumerRecord<String, OrderVO> record) {
         OrderVO orderVO = record.value();
         LOGGER.debug("Received order message: " + orderVO);
-        statusRepository.Save(Status.builder().orderHistory(orderVO.toString()).build());
+        statusRepository.save(Status.builder().orderHistory(orderVO.toString()).build());
     }
 }

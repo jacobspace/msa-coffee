@@ -27,12 +27,12 @@ public class OrderConsumerConfig {
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        configs.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        configs.put(JsonDeserializer.TRUSTED_PACKAGES, "com.example.msa.producer.OrderVO, com.example.msa.consumer.OrderVO");
         return configs;
     }
 
     public ConsumerFactory<String, OrderVO> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+        return new DefaultKafkaConsumerFactory<String, OrderVO>(consumerConfigs(), new StringDeserializer(), new JsonDeserializer<>(OrderVO.class));
     }
 
     @Bean

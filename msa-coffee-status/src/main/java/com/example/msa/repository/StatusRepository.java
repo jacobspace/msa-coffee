@@ -6,7 +6,7 @@ import java.util.List;
 
 @Mapper
 public interface StatusRepository {
-    Long Save(Status status);
+    Long save(Status status);
     List<Status> findAll();
     Status findById(Long id);
 }
